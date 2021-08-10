@@ -17,7 +17,7 @@ export class AuthService {
   async signUp(email: string, password: string) {
     const user = await this.usersService.find(email);
 
-    if (user.length) throw new BadRequestException('Email in use');
+    if (user.length) throw new BadRequestException('Email already in use');
 
     const salt = randomBytes(8).toString('hex');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
@@ -31,8 +31,7 @@ export class AuthService {
 
     if (!user) throw new NotFoundException('User not found');
 
-    const { password: pass } = user;
-    const [salt, storedHash] = pass.split('.');
+    const [salt, storedHash] = user.password.split('.');
     const hash = (await scrypt(password, salt, 32)) as Buffer;
 
     if (storedHash !== hash.toString('hex'))
