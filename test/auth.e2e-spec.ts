@@ -16,7 +16,7 @@ describe('Authentication', () => {
   });
 
   it('handles a signup request', () => {
-    const email = 'tes@gmail.com';
+    const email = 'tes123@gmail.com';
 
     return request(app.getHttpServer())
       .post('/auth/signup')
@@ -30,4 +30,18 @@ describe('Authentication', () => {
         expect(email).toEqual(email);
       });
   });
+
+  // it('handles a signin request', ()=>{
+  //   const email = 'tes123@gmail.com';
+
+  //   return request(app.getHttpServer())
+  //   .post('auth/signin')
+  //   .send({
+  //     email,
+  //     password: '12345'
+  //   }).expect(200)
+  //   .then(({body: {id, email}})=>{
+  //     expect
+  //   })
+  // })
 });
