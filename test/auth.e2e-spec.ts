@@ -16,7 +16,7 @@ describe('Authentication', () => {
   });
 
   it('handles a signup request', () => {
-    const email = 'tes123@gmail.com';
+    const email = 'ini@gmail.com';
 
     return request(app.getHttpServer())
       .post('/auth/signup')
@@ -31,17 +31,26 @@ describe('Authentication', () => {
       });
   });
 
-  // it('handles a signin request', ()=>{
-  //   const email = 'tes123@gmail.com';
+  it('signup us a new user then get the currently logged in user', async () => {
+    const email = 'ini@gmail.com';
 
-  //   return request(app.getHttpServer())
-  //   .post('auth/signin')
-  //   .send({
-  //     email,
-  //     password: '12345'
-  //   }).expect(200)
-  //   .then(({body: {id, email}})=>{
-  //     expect
-  //   })
-  // })
+    const res = await request(app.getHttpServer())
+      .post('/auth/signup')
+      .send({
+        email,
+        password: '12345',
+      })
+      .expect(201);
+
+    const cookie = res.get('Set-Cookie');
+
+    const {
+      body: { email: resEmail },
+    } = await request(app.getHttpServer())
+      .get('/auth/currentuser')
+      .set('Cookie', cookie)
+      .expect(200);
+
+    expect(resEmail).toEqual(email);
+  });
 });
