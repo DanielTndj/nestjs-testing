@@ -18,6 +18,8 @@ export class CurrentUserInterceptor implements NestInterceptor {
 
     if (userId) {
       const user = await this.usersService.findOne(userId);
+
+      //assign property baru (current user) buat di custom decorator
       request.currentUser = user;
     }
 

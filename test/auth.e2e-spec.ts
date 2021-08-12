@@ -53,4 +53,50 @@ describe('Authentication', () => {
 
     expect(resEmail).toEqual(email);
   });
+
+  // it('handles a signout request', async () => {
+  //   const email = 'ini@gmail.com';
+
+  //   const res = await request(app.getHttpServer())
+  //     .post('/auth/signup')
+  //     .send({
+  //       email,
+  //       password: '12345',
+  //     })
+  //     .expect(201);
+
+  //   const cookie = res.get('Set-Cookie');
+
+  //   await request(app.getHttpServer())
+  //   .get('/auth/signout')
+  //   .expect(200);
+
+  //   expect(cookie).toEqual(null);
+  // });
+
+  // it('handles a signin request', async () => {
+  //   const email = 'ini@gmail.com';
+
+  //   const res = await request(app.getHttpServer())
+  //     .post('/auth/signup')
+  //     .send({
+  //       email,
+  //       password: '12345',
+  //     })
+  //     .expect(201);
+
+  //   const cookie = res.get('Set-Cookie');
+
+  //   await request(app.getHttpServer()).post('/auth/signout').expect(200);
+
+  //   expect(cookie).toEqual(null);
+
+  //   await request(app.getHttpServer())
+  //   .post('/auth/signin')
+  //   .send({
+  //     email,
+  //     password: '12345',
+  //   })
+  //   .expect(200)
+  // });
 });
